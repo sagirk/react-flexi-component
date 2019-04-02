@@ -7,6 +7,7 @@ import {
   FlexiConfig,
   ItemType,
   FlexiConfigDropDownItem,
+  FlexiConfigItem,
   FormData
 } from '../types/index';
 
@@ -18,9 +19,16 @@ type Props = {
 const Flexi = ({ onSubmit, config }: Props): JSX.Element => {
   const initialFormData: FormData = {};
 
-  config.items.forEach(item => {
-    initialFormData[item.name] = '';
-  });
+  const generateInitialFormData = (items: FlexiConfigItem[]): void => {
+    items.forEach(item => {
+      initialFormData[item.name] = '';
+      if (item.children) {
+        generateInitialFormData(item.children.items);
+      }
+    });
+  };
+
+  generateInitialFormData(config.items);
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
@@ -30,11 +38,10 @@ const Flexi = ({ onSubmit, config }: Props): JSX.Element => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
     onSubmit(formData);
   };
 
-  const fields = config.items.map(item => {
+  const renderField = (item: FlexiConfigItem): JSX.Element | null => {
     switch (item.type) {
       case ItemType.TextField:
         return (
@@ -43,7 +50,7 @@ const Flexi = ({ onSubmit, config }: Props): JSX.Element => {
             label={item.label}
             value={formData[item.name]}
             onChange={handleFieldChange}
-            key={item.name}
+            key={`${item.name}${item.type}`}
           />
         );
       case ItemType.DropDown:
@@ -54,13 +61,25 @@ const Flexi = ({ onSubmit, config }: Props): JSX.Element => {
             values={(item as FlexiConfigDropDownItem).values}
             value={formData[item.name]}
             onChange={handleFieldChange}
-            key={item.name}
+            key={`${item.name}${item.type}`}
           />
         );
       default:
         return null;
     }
-  });
+  };
+
+  const generateFields = (config: FlexiConfig): (JSX.Element | null)[] => {
+    return config.items.reduce((fields: (JSX.Element | null)[], item) => {
+      fields.push(renderField(item));
+      if (item.children) {
+        fields.push(...generateFields(item.children));
+      }
+      return fields;
+    }, []);
+  };
+
+  const fields = generateFields(config);
 
   return (
     <>

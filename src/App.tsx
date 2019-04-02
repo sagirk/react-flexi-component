@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Flexi from './components/Flexi';
 
-import flexiConfig from './flexiConfig';
+import { normalFlexiConfig, recursiveFlexiConfig } from './flexiConfig';
 import './App.css';
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Flexi Component Demo</h1>
         </header>
-        <Flexi onSubmit={() => {}} config={flexiConfig} />
+        <Flexi onSubmit={() => {}} config={recursiveFlexiConfig} />
       </div>
     );
   }

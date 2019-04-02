@@ -7,6 +7,7 @@ export interface FlexiConfigTextFieldItem {
   name: string;
   label: string;
   type: ItemType;
+  children?: FlexiConfig;
 }
 
 export interface FlexiConfigDropDownItem {
@@ -14,10 +15,15 @@ export interface FlexiConfigDropDownItem {
   label: string;
   type: ItemType;
   values: string[];
+  children?: FlexiConfig;
 }
 
+export type FlexiConfigItem =
+  | FlexiConfigTextFieldItem
+  | FlexiConfigDropDownItem;
+
 export interface FlexiConfig {
-  items: (FlexiConfigTextFieldItem | FlexiConfigDropDownItem)[];
+  items: FlexiConfigItem[];
 }
 
 export interface FormData {
