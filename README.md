@@ -1,28 +1,21 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## [Demo](https://sagirk.github.io/react-flexi-component)
 
-## Available Scripts
+For the adventurous, the production build of an app using the `Flexi` component is deployed on [GitHub Pages](https://sagirk.github.io/react-flexi-component).
 
-In the project directory, you can run:
+## Tech Stack
 
-### `npm start`
+| Concern              | Framework/Library/Tool                    |
+| -------------------- | ----------------------------------------- |
+| Application Scaffold | [Create React App][]                      |
+| UI Components        | [React][]                                 |
+| State Management     | React [State Hook][]s                     |
+| Tests                | [Jest][] with [`react-testing-library`][] |
+| Static Types         | [TypeScript][]                            |
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- Links -->
+[Create React App]: https://github.com/facebook/create-react-app/
+[React]: https://reactjs.org/
+[State Hook]: https://reactjs.org/docs/hooks-overview.html#state-hook
+[Jest]: https://jestjs.io/
+[`react-testing-library`]: https://testing-library.com/react/
+[TypeScript]: https://www.typescriptlang.org/
